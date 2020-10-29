@@ -1,11 +1,8 @@
-import os
-from glob import glob
-import torch
 from torchvision import models
 
 from utils import *
-from create_dataset import *
-from train_instance import train_model
+from vgg16.create_dataset import *
+from vgg16.train_instance import train_model
 
 torch.set_default_tensor_type('torch.cuda.FloatTensor')
 torch.backends.cudnn.benchmark = True

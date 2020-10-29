@@ -1,4 +1,3 @@
-import numpy as np
 from PIL import Image
 from tqdm import tqdm
 import torch
@@ -24,7 +23,7 @@ def main():
     print("##### VGG-16 model load has done and set EVAL mode. #####")
 
     # 自作modelのロード
-    load_path = 'models/20201026/weights_2020-10-26_143533_3.46_.pth'
+    load_path = '../models/20201026/weights_2020-10-26_143533_3.46_.pth'
     load_weights = torch.load(load_path, map_location=device)
     net.load_state_dict(load_weights)
     print("##### Dataset load has done. #####")
