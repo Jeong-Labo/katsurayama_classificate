@@ -58,7 +58,7 @@ def train_model(net, dataloaders_dict, criterion, optimizer, num_epochs=10):
         # モデルの保存
         dt_now = datetime.now()
         dt_now_for_filename = dt_now.strftime('%Y-%m-%d_%H%M%S')
-        model_save_path = "../models/vgg16/weights_{}_{:.3}_.pth".format(dt_now_for_filename, epoch_loss_for_filename)
+        model_save_path = "model_weights/weights_{}_{:.3}_.pth".format(dt_now_for_filename, epoch_loss_for_filename)
         torch.save(net.state_dict(), model_save_path)
 
 
