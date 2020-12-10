@@ -2,11 +2,13 @@ import os
 from glob import glob
 from torchvision import transforms
 
+
 def make_datapath_list(phase='train'):
     rootpath = "./dataset/"
     target_path = os.path.join(rootpath + phase + '/**/*.jpg')
     path_list = [path for path in glob(target_path)]
     return path_list
+
 
 class BaseTransfrom():
     """
