@@ -35,20 +35,12 @@ def main():
     # 一枚ずつ取り出して推論を実行
     num_preds = len(image_paths)
     num_correct = 0
-    target_module = net.classifier[4]   # コールバック関数を組み込む（出力を取りたい）層の指定
     for img_path in tqdm(image_paths):
         img = Image.open(img_path)
         transform = BaseTransfrom()     # use ILSVRC2012 default params
         transformed_img = transform(img).to(device)     # torch.size([3, 224, 224])
         inputs = transformed_img.unsqueeze_(0)          # torch.size([1, 3, 224, 224])
         correct = img_path.split("\\")[-2]  # set correct label
-
-        # tensorboard用特徴量をとるためのコールバック
-        def forward_hook(self, input, output):
-            # print(output[0].size())     # tensor.Size([4096])
-            with SummaryWriter('./logs/') as log:
-                log.add_embedding(mat=output)
-        target_module.register_forward_hook(forward_hook)
 
         # 推論実行とラベルに変換
         out_tensor = net(inputs)
