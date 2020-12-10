@@ -7,6 +7,17 @@ from torchvision import models
 from utils import *
 
 
+def save_features(features_tensor, save_dir):
+    # 特徴量の保存
+    df = pd.DataFrame(features_tensor, index=None, columns=None)
+    print(df.head())
+    df.to_csv(save_dir + 'features.csv', header=False, index=False)
+
+    # 平均値の保存
+    df_avg = df.mean()
+    df_avg.to_csv(save_dir + 'features_avg.csv', header=False, index=False)
+
+
 def main():
     # モデル定義（最後のドロップアウトとソフトマックスを排除した特徴量抽出器）
     model = models.vgg16_bn(pretrained=True)
@@ -41,9 +52,7 @@ def main():
         output_feature_tensor_list = output_feature_tensor_np.tolist()
         features_tensor.append(output_feature_tensor_list[0])
 
-    df = pd.DataFrame(features_tensor, index=None, columns=None)
-    print(df.head())
-    df.to_csv('features_vec/features_not_masked.csv', header=False, index=False)
+    save_features(features_tensor=features_tensor, save_dir='features_vec/')
 
 
 if __name__ == '__main__':
