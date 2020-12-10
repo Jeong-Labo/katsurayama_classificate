@@ -43,7 +43,7 @@ def main():
 
     df = pd.DataFrame(features_tensor, index=None, columns=None)
     print(df.head())
-    df.to_csv('features_not_masked.csv', header=False, index=False)
+    df.to_csv('features_vec/features_not_masked.csv', header=False, index=False)
 
 
 if __name__ == '__main__':
