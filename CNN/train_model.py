@@ -22,6 +22,7 @@ def do_train(net, data_loader, criterion, scheduler, optimizer, num_epochs, devi
             epoch_loss = 0.0
             epoch_corrects = 0
 
+            scheduler.step(epoch_loss)
             for inputs, labels in tqdm(data_loader[phase]):
                 labels = labels.to(device)
                 optimizer.zero_grad()
@@ -35,7 +36,6 @@ def do_train(net, data_loader, criterion, scheduler, optimizer, num_epochs, devi
                     if phase == 'train':
                         loss.backward()
                         optimizer.step()
-                        scheduler.step()
 
                     epoch_loss += loss.item() * inputs.size(0)
                     epoch_corrects += torch.sum(preds == labels.data)
@@ -71,8 +71,8 @@ def main():
 
     # setting train options
     lr = 1e-3
-    optimizer = optim.SGD(params=net.parameters(), lr=lr)
-    scheduler = optim.lr_scheduler.StepLR(optimizer=optimizer, gamma=0.5, step_size=5)
+    optimizer = optim.Adam(params=net.parameters(), lr=lr)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer=optimizer, patience=2)
     criterion = nn.CrossEntropyLoss()
 
     # do train
