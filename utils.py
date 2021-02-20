@@ -3,9 +3,9 @@ from glob import glob
 from torchvision import transforms
 
 
-def make_datapath_list(phase='train'):
-    rootpath = "./dataset/"
-    target_path = os.path.join(rootpath + phase + '/**/*.jpg')
+def make_datapath_list(phase='train', label='**'):
+    rootpath = "../dataset/"
+    target_path = os.path.join(rootpath + phase + '/' + label + '/*.jpg')
     path_list = [path for path in glob(target_path)]
     return path_list
 

@@ -27,10 +27,11 @@ def main():
     model.to(device=device)
     model.eval()
 
-    # 画像データ
-    ok_image_dir = '../../dataset/katsurayama-data/YAN111-04_ok/'
-    image_paths = os.listdir(ok_image_dir)
-    mask_img = Image.open('../../dataset/katsurayama-data/mask.jpg').convert('1')
+    # 画像データ(正解データだけ抽出)
+    image_paths = make_datapath_list(phase="**", label='ok')
+    # mask_path = '../../dataset/katsurayama-data/mask.jpg'
+    mask_path = '../dataset/mask.jpg'
+    mask_img = Image.open(mask_path).convert('1')
     paste_mask_img = Image.new("RGB", mask_img.size, (0, 0, 0))
 
     # 前処理の定義
@@ -39,7 +40,7 @@ def main():
     # 特徴量をまとめる
     features_tensor = []
     for img_path in tqdm(image_paths):
-        img = Image.open(ok_image_dir + img_path)
+        img = Image.open(img_path)
         img = Image.composite(img, paste_mask_img, mask_img)
 
         transformed_img = transform(img).to(device)  # torch.size([3, 224, 224])

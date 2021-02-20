@@ -1,7 +1,7 @@
 from PIL import Image
 from tqdm import tqdm
 import torch
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from torchvision import models, transforms
 
 from utils import *
@@ -14,7 +14,7 @@ def main():
 
     # 1000クラス分類を4クラス分類に変更
     net.classifier[6] = torch.nn.Linear(net.classifier[6].in_features, 4)
-    # print(net)
+    print(net)
 
     # CPU or GPUに移動させ、推論モードに変更
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
