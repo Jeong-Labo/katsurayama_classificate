@@ -22,7 +22,6 @@ def do_train(net, data_loader, criterion, scheduler, optimizer, num_epochs, devi
             epoch_loss = 0.0
             epoch_corrects = 0
 
-            scheduler.step(epoch_loss)
             for inputs, labels in tqdm(data_loader[phase]):
                 labels = labels.to(device)
                 optimizer.zero_grad()
@@ -42,12 +41,14 @@ def do_train(net, data_loader, criterion, scheduler, optimizer, num_epochs, devi
 
             epoch_loss = epoch_loss / len(data_loader[phase].dataset)
             epoch_acc = epoch_corrects.double() / len(data_loader[phase].dataset)
-            print(f'{phase}: Loss = {epoch_loss:.4f}, Acc = {epoch_acc:.4f}')
+            print(f'{phase}: Loss = {epoch_loss:.6f}, Acc = {epoch_acc:.4f}')
+            if phase == 'val':
+                scheduler.step(epoch_loss)
 
             # save model
-            if phase == 'val' and epoch % 5 == 0:
+            if phase == 'val' and (epoch + 1) % 5 == 0:
                 save_dir = './model_weights/'
-                save_file_name = f'epoch-{epoch}_loss-{epoch_loss:.4}.pth'
+                save_file_name = f'epoch-{epoch}_loss-{epoch_loss:.4f}.pth'
                 torch.save(net.state_dict(), join(save_dir, save_file_name))
 
 
@@ -72,11 +73,11 @@ def main():
     # setting train options
     lr = 1e-3
     optimizer = optim.Adam(params=net.parameters(), lr=lr)
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer=optimizer, patience=2)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer=optimizer, patience=2, verbose=True)
     criterion = nn.CrossEntropyLoss()
 
     # do train
-    num_epochs = 25
+    num_epochs = 50
     do_train(net=net,
              data_loader=data_loader,
              criterion=criterion,
