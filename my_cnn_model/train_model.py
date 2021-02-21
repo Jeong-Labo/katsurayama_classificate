@@ -53,7 +53,7 @@ def do_train(net, data_loader, criterion, scheduler, optimizer, num_epochs, devi
 
 
 def main():
-    # create CNN model
+    # create my_cnn_model model
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     net = MyModel(input_ch=1).to(device)
     net.train()

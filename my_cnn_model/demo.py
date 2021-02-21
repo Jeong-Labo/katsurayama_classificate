@@ -3,7 +3,7 @@ from PIL import Image
 from tqdm import tqdm
 import torch
 from torchvision.transforms.functional import to_tensor
-from CNN.my_utils.my_model import MyModel
+from my_cnn_model.my_utils.my_model import MyModel
 
 
 def create_input_tensor(file_path, device):
