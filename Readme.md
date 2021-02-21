@@ -47,12 +47,12 @@
 
 #### 結果
 学習データ
-- ok : xx
-- ng level 5 : xx
+- ok : 9472
+- ng level 5 : 142
 
 テストデータ
-- ok : xx
-- ng level 5 : xx
+- ok : 2368
+- ng level 5 : 36
 
 テスト結果
 ```
