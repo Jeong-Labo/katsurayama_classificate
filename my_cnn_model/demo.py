@@ -74,7 +74,7 @@ def main():
     # 再現率：結果として出てくるべきのもののうち、実際に出てきた割合
     recall = true_p / (true_p + false_n)
     print(f'Precision: {precision:.4f}, Recall: {recall:.4f}')
-    print(f'OK: {len(ok_file_path_list)} samples, NG-LV: {len(l5_file_path_list)} samples '
+    print(f'OK: {len(ok_file_path_list)} samples, NG-LV5: {len(l5_file_path_list)} samples '
           f'=> OK: {predict_ok}, NG-LV5: {predict_l5} classified')
 
 

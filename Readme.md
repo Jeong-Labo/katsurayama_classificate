@@ -65,5 +65,5 @@ image11838_bin.jpg => predicted: NG-level-5 (true label: ok)
 image11839_bin.jpg => predicted: NG-level-5 (true label: ok)
 ================================
 Precision: 0.8372, Recall: 1.0000
-OK: 2368 samples, NG-LV: 36 samples => OK: 2361, NG-LV5: 43 classified
+OK: 2368 samples, NG-LV5: 36 samples => OK: 2361, NG-LV5: 43 classified
 ```
