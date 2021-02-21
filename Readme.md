@@ -23,14 +23,47 @@
 - torchvision == 0.7.0
 
 ## 4. 実行
-#### 画像処理のみでの対応
+### 画像処理のみでの対応
 これから。グレースケールや2値化してからエッジの面積とるとか？
-#### VGG16を用いた画像分類
+
+### VGG16を用いた画像分類
 ※データの前処理はILSVRC2012準拠でやった。
 - demo.py : 推論の実行。`$ python demo.py` で動くはず。
 - train.py : 訓練の実行。教師データのパスを確認して、`$ python demo.py` で動くはず。
 
-> 結果があまり芳しくない。おそらく前処理の問題が大きいが、転移学習のためにそうせざるを得ない。
+> 結果があまり芳しくない。おそらく前処理の問題が大きいが、転移学習のためにそうせざるを得ない。  
 > 1から学習しようにもデータ数的に足りるとは考えにくい。
-#### GANを用いた異常検知
-これから。
+
+### 自作モデル組んで画像分類
+自作モデル組んでみた。  
+条件は **「OKとLevel5を分類できるかどうか」** とした。  
+画像に以下の前処理をかけたもので学習・テストし、結果を以下に示す。
+
+> 画像の前処理
+>- マスクをかける
+>- 810*610で中心をトリミング
+>- グレースケール化
+>- 大津式二値化をかける
+
+#### 結果
+学習データ
+- ok : xx
+- ng level 5 : xx
+
+テストデータ
+- ok : xx
+- ng level 5 : xx
+
+テスト結果
+```
+image11832_bin.jpg => predicted: NG-level-5 (true label: ok)
+image11834_bin.jpg => predicted: NG-level-5 (true label: ok)
+image11835_bin.jpg => predicted: NG-level-5 (true label: ok)
+image11836_bin.jpg => predicted: NG-level-5 (true label: ok)
+image11837_bin.jpg => predicted: NG-level-5 (true label: ok)
+image11838_bin.jpg => predicted: NG-level-5 (true label: ok)
+image11839_bin.jpg => predicted: NG-level-5 (true label: ok)
+================================
+Precision: 0.8372, Recall: 1.0000
+OK: 2368 samples, NG-LV: 36 samples => OK: 2361, NG-LV5: 43 classified
+```
