@@ -13,7 +13,7 @@
 ## 2. ファイル構成
 データセットは `dataset/train/` / `dataset/val` にレベル別で設置してください。  
 学習済みモデルはこちらから（[Google drive]()）  
-詳細は、金澤（[a19108@numazu.kosen-ac.jp]()）まで。  
+詳細は、金澤（[w68i248a@icloud.com]()）まで。  
 
 ## 3. 動作確認環境
 - python == 3.7.9
